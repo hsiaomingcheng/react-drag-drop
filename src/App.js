@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import styled from 'styled-components';
+import rootReducer from '../redux/reducers';
+
+import Home from './pages/Home';
+
+const store = createStore(rootReducer);
 
 class App extends Component {
     constructor(props) {
@@ -10,18 +17,16 @@ class App extends Component {
 
     render() {
         return (
-            <AppContainer className="app">
-                <H1> 簡易計算機, this is made by React! </H1>
-            </AppContainer>
+            <Provider store={store}>
+                <AppContainer className="app">
+                    <Home />
+                </AppContainer>
+            </Provider>
         );
     }
 }
 
 export default hot(module)(App);
-
-const H1 = styled.h1`
-    color: red;
-`;
 
 const AppContainer = styled.div`
     font-family: Arial, Helvetica, sans-serif;
