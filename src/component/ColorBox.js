@@ -14,6 +14,7 @@ class ColorBox extends React.Component {
                 draggable
                 onDragStart={() => handleDragStart(color)}
                 color={color}
+                title={color}
             />
         );
     }
@@ -27,7 +28,7 @@ ColorBox.defaultProps = {
 };
 
 const ColorBoxContainer = styled.div`
-    margin: 0 auto 20px;
+    margin: 0 10px 10px;
     background: ${(props) => props.color};
     width: 100px;
     height: 100px;

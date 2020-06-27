@@ -25,11 +25,13 @@ class SideColumn extends React.Component {
             <SideColumnContainer>
                 {
                     colorList.map((color) => (
-                        <ColorBox
-                            key={color}
-                            color={color}
-                            handleDragStart={(e) => this.handleDragStart(e)}
-                        />
+                        <ColorArea key={color}>
+                            <ColorBox
+                                color={color}
+                                handleDragStart={(e) => this.handleDragStart(e)}
+                            />
+                            <span>{color}</span>
+                        </ColorArea>
                     ))
                 }
             </SideColumnContainer>
@@ -48,14 +50,16 @@ export default connect(
     mapDispatchToProps,
 )(SideColumn);
 
+const ColorArea = styled.div`
+    margin-bottom: 10px;
+`;
+
 const SideColumnContainer = styled.div`
     display: flex;
     border: solid 1px #000;
     padding: 10px;
-    width: 262px;
-    min-height: 262px;
-    max-height: 502px;
+    max-width: 622px;
+    min-height: 122px;
     flex-wrap: wrap;
-    flex-direction: column;
     box-sizing: border-box;
 `;

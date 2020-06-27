@@ -15,10 +15,12 @@ class MixColorBox extends React.Component {
         this.handleDrop = this.handleDrop.bind(this);
         this.handleDragOver = this.handleDragOver.bind(this);
         this.handleMixColor = this.handleMixColor.bind(this);
+        this.handleClearColor = this.handleClearColor.bind(this);
         this.handleUpdateColorArray = this.handleUpdateColorArray.bind(this);
     }
 
     handleDrop(e) {
+        // 放入顏色
         const { color, handleSetMixColor } = this.props;
         const { firstColor } = this.state;
 
@@ -44,6 +46,7 @@ class MixColorBox extends React.Component {
     }
 
     handleMixColor() {
+        // 混合顏色
         const { handleSetMixColor } = this.props;
         const { firstColor, secondColor } = this.state;
         let mixColorString = '#';
@@ -65,6 +68,11 @@ class MixColorBox extends React.Component {
         });
 
         handleSetMixColor(mixColorString);
+    }
+
+    handleClearColor() {
+        // 清空調色區
+        this.setState({ firstColor: '' });
     }
 
     handleUpdateColorArray() {
@@ -90,12 +98,20 @@ class MixColorBox extends React.Component {
                     onDragOver={(e) => this.handleDragOver(e)}
                     bgColor={firstColor}
                 />
-                <JoinColorButton
+
+                <ButtonStyle
                     onClick={(e) => this.handleUpdateColorArray(e)}
                 >
                     加到我的調色盤
 
-                </JoinColorButton>
+                </ButtonStyle>
+
+                <ButtonStyle
+                    onClick={(e) => this.handleClearColor(e)}
+                >
+                    清空我的調色區
+
+                </ButtonStyle>
             </div>
         );
     }
@@ -116,7 +132,8 @@ export default connect(
     mapDispatchToProps,
 )(MixColorBox);
 
-const JoinColorButton = styled.div`
+const ButtonStyle = styled.div`
+    margin-bottom: 10px;
     border: solid 1px #000;
     border-radius: 5px;
     padding: 15px;
@@ -126,6 +143,7 @@ const JoinColorButton = styled.div`
 const MixColorBoxContainer = styled.div`
     margin-bottom: 15px;
     border: solid 1px #000;
+    border-radius: 50%;
     background: ${(props) => props.bgColor};
     width: 200px;
     height: 200px;
